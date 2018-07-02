@@ -1880,6 +1880,13 @@ make_directory_button (CajaPathBar  *path_bar,
 
     path = caja_file_get_location (file);
 
+    /*Don't throw warnings and crash with GTK 3.23 or later on opening windows
+     *If path cannot be found, abandon trying to create a button and return NULL
+     */
+    if (path == NULL || !path){
+        return NULL;
+    }
+
     child = NULL;
 
     file_is_hidden = !! file_is_hidden;
